@@ -4,7 +4,7 @@ import com.example.tacos.domain.Ingredient;
 import com.example.tacos.domain.Taco;
 import com.example.tacos.domain.TacoOrder;
 import com.example.tacos.repository.IngredientRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;

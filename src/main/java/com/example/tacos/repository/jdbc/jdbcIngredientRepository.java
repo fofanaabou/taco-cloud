@@ -2,7 +2,7 @@ package com.example.tacos.repository.jdbc;
 
 import com.example.tacos.domain.Ingredient;
 import com.example.tacos.repository.IngredientRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class jdbcIngredientRepository implements IngredientRepository {
 
     private final JdbcTemplate jdbcTemplate;
