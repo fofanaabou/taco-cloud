@@ -1,6 +1,8 @@
 package com.example.tacos.controllers;
 
 import com.example.tacos.domain.TacoOrder;
+import com.example.tacos.repository.OrderRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -16,7 +18,10 @@ import javax.validation.Valid;
 @Controller
 @SessionAttributes("tacoOrder")
 @RequestMapping("/orders")
+@RequiredArgsConstructor
 public class orderController {
+
+    private final OrderRepository orderRepository;
 
     @GetMapping("/current")
     public String orderForm(){
@@ -29,7 +34,7 @@ public class orderController {
 
         if(errors.hasErrors())
             return "orderForm";
-        log.info("Order submitted: {}", order);
+        orderRepository.save(order);
         sessionStatus.setComplete();
 
         return "redirect:/";
