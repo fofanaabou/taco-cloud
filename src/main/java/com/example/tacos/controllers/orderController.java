@@ -1,7 +1,7 @@
 package com.example.tacos.controllers;
 
 import com.example.tacos.domain.TacoOrder;
-import com.example.tacos.repository.OrderRepository;
+import com.example.tacos.repository.jdbc.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
