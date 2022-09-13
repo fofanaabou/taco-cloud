@@ -1,7 +1,7 @@
 package com.example.tacos.controllers;
 
 import com.example.tacos.domain.TacoOrder;
-import com.example.tacos.repository.jdbc.OrderRepository;
+import com.example.tacos.repository.jpa.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class orderController {
 
-    private final OrderRepository orderRepository;
+    private final OrderJpaRepository orderJpaRepository;
 
     @GetMapping("/current")
     public String orderForm(){
@@ -36,7 +36,7 @@ public class orderController {
         if(errors.hasErrors())
             return "orderForm";
         order.setPlacedAt(new Date());
-        orderRepository.save(order);
+        orderJpaRepository.save(order);
         sessionStatus.setComplete();
 
         return "redirect:/";

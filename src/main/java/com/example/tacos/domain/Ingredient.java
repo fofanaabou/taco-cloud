@@ -1,26 +1,24 @@
 package com.example.tacos.domain;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Data
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Getter
+@Setter
+@ToString
 @Table
-@NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
 @AllArgsConstructor
-@Builder
-public class Ingredient implements Persistable<String> {
+@Entity
+public class Ingredient  {
 
     @Id
     private  String id;
     private  String name;
     private  Type type;
-
-    @Override
-    public boolean isNew() {
-        return true;
-    }
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE

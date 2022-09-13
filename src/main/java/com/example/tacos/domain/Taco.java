@@ -1,23 +1,26 @@
 package com.example.tacos.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.lang.NonNull;
 
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Table
+@Entity
 @NoArgsConstructor
 public class Taco {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date createdAt = new Date();
@@ -28,5 +31,20 @@ public class Taco {
 
     @NonNull
     @Size(min = 5, message = "You must choose at least 1 ingredient")
-    private List<IngredientRef> ingredients;
+    @ManyToMany
+    @ToString.Exclude
+    private List<Ingredient> ingredients;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Taco taco = (Taco) o;
+        return id != null && Objects.equals(id, taco.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
