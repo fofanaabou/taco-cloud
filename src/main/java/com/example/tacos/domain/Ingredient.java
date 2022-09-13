@@ -1,9 +1,6 @@
 package com.example.tacos.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
@@ -12,6 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table
 @NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
 @AllArgsConstructor
+@Builder
 public class Ingredient implements Persistable<String> {
 
     @Id
@@ -21,7 +19,7 @@ public class Ingredient implements Persistable<String> {
 
     @Override
     public boolean isNew() {
-        return false;
+        return true;
     }
 
     public enum Type {
