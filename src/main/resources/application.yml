@@ -4,6 +4,8 @@ spring:
   datasource:
     generate-unique-name: false
     name: tacocloud
+  main:
+      allow-bean-definition-overriding: true
 
 server:
-  port: 8081
+  port: 8088
