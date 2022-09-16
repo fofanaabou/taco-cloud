@@ -1,19 +1,19 @@
 package com.example.tacos.config;
 
+import com.example.tacos.domain.User;
+import com.example.tacos.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
@@ -22,19 +22,28 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder){
-        UserDetails user = User.builder()
-                .username("user")
-                .password(encoder.encode("user"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(encoder.encode("admin"))
-                .roles("USER", "ADMIN")
-                .build();
+    public UserDetailsService userDetailsService(UserRepository userRepository){
+        return username -> {
+            User user = userRepository.findByUsername(username);
+            if (user != null) return user;
 
-        return new InMemoryUserDetailsManager(user, admin);
-
+            throw new UsernameNotFoundException("User" +username + "not found");
+        };
     }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        return http.
+                authorizeRequests()
+                .antMatchers("/design", "/orders")
+                .access("hasRole('USER')")
+                .antMatchers("/", "/**").access("permitAll()")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/design")
+                .and()
+                .build();
+    }
+
 }
