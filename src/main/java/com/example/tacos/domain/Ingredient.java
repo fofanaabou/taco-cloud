@@ -1,10 +1,10 @@
 package com.example.tacos.domain;
 
 import lombok.*;
-import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter

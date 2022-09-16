@@ -2,7 +2,6 @@ package com.example.tacos.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;

@@ -3,7 +3,6 @@ package com.example.tacos.domain;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;

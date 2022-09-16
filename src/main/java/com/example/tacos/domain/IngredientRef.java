@@ -1,7 +1,8 @@
 package com.example.tacos.domain;
 
 import lombok.Data;
-import org.springframework.data.relational.core.mapping.Table;
+
+import javax.persistence.Table;
 
 @Data
 @Table
