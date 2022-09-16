@@ -3,7 +3,7 @@ package com.example.tacos.controllers;
 import com.example.tacos.domain.Ingredient;
 import com.example.tacos.domain.Taco;
 import com.example.tacos.domain.TacoOrder;
-import com.example.tacos.repository.jpa.IngredientJpaRepository;
+import com.example.tacos.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DesignTacoController {
 
-    private final IngredientJpaRepository ingredientJpaRepository;
+    private final IngredientRepository ingredientRepository;
 
     @ModelAttribute
     public void addIngredientsToModel(Model model){
-        Iterable<Ingredient> ingredients = ingredientJpaRepository.findAll();
+        Iterable<Ingredient> ingredients = ingredientRepository.findAll();
 
         Ingredient.Type[] types = Ingredient.Type.values();
 

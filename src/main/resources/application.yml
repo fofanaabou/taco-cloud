@@ -1,11 +1,12 @@
 spring:
   thymeleaf:
     cache: true
-  datasource:
-    generate-unique-name: false
-    name: tacocloud
-  main:
-      allow-bean-definition-overriding: true
-
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: tacocloud
+      password: tacocloud
+      database: tacoclouddb
 server:
-  port: 8088
+  port: 8086

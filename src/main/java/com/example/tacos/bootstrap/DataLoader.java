@@ -1,7 +1,7 @@
 package com.example.tacos.bootstrap;
 
 import com.example.tacos.domain.Ingredient;
-import com.example.tacos.repository.jpa.IngredientJpaRepository;
+import com.example.tacos.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 public class DataLoader implements ApplicationRunner {
 
-    private final IngredientJpaRepository ingredientJpaRepository;
+    private final IngredientRepository ingredientRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -24,7 +24,7 @@ public class DataLoader implements ApplicationRunner {
     }
 
     @Transactional
-    void loadData(){
+    void loadData() {
 
         List<Ingredient> ingredients = List.of(
                 new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
@@ -38,6 +38,6 @@ public class DataLoader implements ApplicationRunner {
         new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE),
         new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
 
-        ingredientJpaRepository.saveAll(ingredients);
+        ingredientRepository.saveAll(ingredients);
     }
 }

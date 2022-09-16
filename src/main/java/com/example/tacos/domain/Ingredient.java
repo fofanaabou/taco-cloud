@@ -1,18 +1,13 @@
 package com.example.tacos.domain;
 
 import lombok.*;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Getter
-@Setter
-@ToString
-@Table
-@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
+@Data
 @AllArgsConstructor
-@Entity
+@Document(collation = "ingredients")
+@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
 public class Ingredient  {
 
     @Id
