@@ -1,21 +1,19 @@
 package com.example.tacos.domain;
 
 import lombok.*;
-import org.springframework.data.relational.core.mapping.Table;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
 @Getter
 @Setter
 @ToString
-@Table
+@Table("ingredient")
 @NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
 @AllArgsConstructor
-@Entity
 public class Ingredient  {
 
-    @Id
+    @PrimaryKey
     private  String id;
     private  String name;
     private  Type type;

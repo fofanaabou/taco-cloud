@@ -1,28 +1,30 @@
 package com.example.tacos.domain;
 
-import lombok.*;
-import org.hibernate.Hibernate;
-import org.springframework.data.relational.core.mapping.Table;
+import com.datastax.oss.driver.api.core.uuid.Uuids;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.data.cassandra.core.cql.Ordering;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+import java.util.UUID;
 
-@Getter
-@Setter
-@ToString
-@Table
-@Entity
+@Data
+@Table("tacos")
 @NoArgsConstructor
 public class Taco {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED)
+    private UUID id = Uuids.timeBased();
 
+    @PrimaryKeyColumn(type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
     private Date createdAt = new Date();
 
     @NonNull
@@ -31,20 +33,10 @@ public class Taco {
 
     @NonNull
     @Size(min = 5, message = "You must choose at least 1 ingredient")
-    @ManyToMany
-    @ToString.Exclude
-    private List<Ingredient> ingredients;
+    @Column("ingredients")
+    private List<IngredientUDT> ingredients;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Taco taco = (Taco) o;
-        return id != null && Objects.equals(id, taco.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public void addIngredient(Ingredient ingredient){
+        this.ingredients.add(TacoUDRUtils.toIngredientUDT(ingredient));
     }
 }

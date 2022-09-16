@@ -6,6 +6,15 @@ spring:
     name: tacocloud
   main:
       allow-bean-definition-overriding: true
+  data:
+    cassandra:
+      keyspace-name: tacocloud
+      schema-action: recreate
+      local-datacenter: datacenter1
+      username: tacocloud
+      password: tacocloud
+      request:
+        timeout: PT10S
 
 server:
   port: 8088
