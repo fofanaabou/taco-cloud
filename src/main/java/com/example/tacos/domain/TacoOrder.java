@@ -17,7 +17,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@Table
+@Table(name = "taco_order")
 @Entity
 @NoArgsConstructor
 public class TacoOrder implements Serializable {
@@ -57,6 +57,9 @@ public class TacoOrder implements Serializable {
     @OneToMany(cascade = {CascadeType.ALL})
     @ToString.Exclude
     private List<Taco> tacos = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 
     public void addTaco(Taco taco){
         this.tacos.add(taco);

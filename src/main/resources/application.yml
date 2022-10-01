@@ -6,6 +6,13 @@ spring:
     name: tacocloud
   main:
       allow-bean-definition-overriding: true
-
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: ea9738c692f73731ea2d
+            clientSecret: b51de12eec232fa9a99e519d42954e88f4765c61
+            scope: email, public_profile
 server:
-  port: 8088
+  port: 8080

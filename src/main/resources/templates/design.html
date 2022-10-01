@@ -7,6 +7,10 @@
 <body>
 <h1>Design your taco!</h1>
 <img th:src="@{/images/TacoCloud.png}" alt="" src=""/>
+<form method="POST" th:action="@{/logout}" style="position: relative; left: 50em; bottom: 25em">
+    <input type="submit" value="Logout"/>
+</form>
+<!--    <a th:href="/oauth2/authorization/github">Sign in with Github</a>-->
 
 <form method="post" th:object="${taco}">
     <div class="grid">
@@ -64,6 +68,8 @@
     <h3>Name your taco creation:</h3>
     <input type="text" th:field="*{name}"/>
     <br/>
+
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 
     <button>Submit Your Taco</button>
 
