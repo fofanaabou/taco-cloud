@@ -1,6 +1,9 @@
 package com.example.tacos.repository;
 
 import com.example.tacos.domain.TacoOrder;
+import com.example.tacos.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,4 +16,5 @@ public interface OrderRepository extends CrudRepository<TacoOrder, Long> {
     List<TacoOrder> readTacoOrdersByDeliveryZipAndPlacedAtBetween(
             String deliveryZip,
             Date startDate, Date endDate);
+    List<TacoOrder> findByUserOrderByPlacedAtDesc(User user, Pageable pageable);
 }

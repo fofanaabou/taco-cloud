@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: Taco Cloud
   thymeleaf:
     cache: true
   datasource:
@@ -15,4 +17,33 @@ spring:
             clientSecret: b51de12eec232fa9a99e519d42954e88f4765c61
             scope: email, public_profile
 server:
-  port: 8080
+  port: 8443
+  ssl:
+    key-store: classpath:mykeys.jks
+    key-password: fofana
+    key-store-password: fofana
+logging:
+  level:
+    root: WARN
+    org.springframework.security: DEBUG
+
+greeting:
+  welcome: You are using ${spring.application.name}
+
+taco:
+  orders:
+    pageSize: 10
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud
+    username: tacouser
+    password: tacopassword
+logging:
+  level:
+    tacos: WARN
