@@ -4,7 +4,6 @@ import com.example.tacos.domain.User;
 import com.example.tacos.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,8 +39,8 @@ public class SecurityConfig {
                 authorizeRequests()
                 .mvcMatchers("/design", "/orders")
                 .access("hasRole('USER')")
-                .antMatchers("/", "/**").access("permitAll()")
-                // .antMatchers(HttpMethod.DELETE,"/admin/**").access("hasRole('ADMIN')")
+/*                .antMatchers("/", "/**").access("permitAll()")
+                // .antMatchers(HttpMethod.DELETE,"/admin/**").access("hasRole('ADMIN')")*/
                 .and()
                 .formLogin()
                 .loginPage("/login")

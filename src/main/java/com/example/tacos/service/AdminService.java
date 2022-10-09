@@ -12,5 +12,5 @@ public interface AdminService {
 
     @PostAuthorize("hasRole('USER') ||" +
             "returnObject.user.name == authentication.name")
-    public TacoOrder getOrder(Long id);
+    TacoOrder getOrder(Long id);
 }
