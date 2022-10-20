@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: Taco Cloud
+  thymeleaf:
+      cache: true
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: ea9738c692f73731ea2d
+            clientSecret: b51de12eec232fa9a99e519d42954e88f4765c61
+            scope: email, public_profile
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: fofana
+    url: jdbc:postgresql://localhost:5432/taco-cloud
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  data:
+    rest:
+      base-path: /data-api
+#server:
+#  port: 8443
+#  ssl:
+#    key-store: classpath:mykeys.jks
+#    key-password: fofana
+#    key-store-password: fofana
+greeting:
+  welcome: You are using ${spring.application.name}
+taco:
+  orders:
+    pageSize: 10
+logging:
+  level:
+    root: INFO
+    tacos: INFO

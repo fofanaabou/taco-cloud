@@ -1,8 +1,12 @@
 spring:
+  config:
+    activate:
+      on-profile: prod
   datasource:
-    url: jdbc:mysql://localhost/tacocloud
-    username: tacouser
-    password: tacopassword
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: fofana
+    url: jdbc:postgresql://localhost:5432/taco-cloud
 logging:
   level:
     tacos: WARN
