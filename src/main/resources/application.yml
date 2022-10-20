@@ -16,6 +16,9 @@ spring:
             clientId: ea9738c692f73731ea2d
             clientSecret: b51de12eec232fa9a99e519d42954e88f4765c61
             scope: email, public_profile
+  config:
+    activate:
+      on-profile: dev
 server:
   port: 8443
   ssl:
@@ -24,26 +27,11 @@ server:
     key-store-password: fofana
 logging:
   level:
-    root: WARN
+    root: DEBUG
     org.springframework.security: DEBUG
 
 greeting:
   welcome: You are using ${spring.application.name}
-
 taco:
   orders:
     pageSize: 10
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    url: jdbc:mysql://localhost/tacocloud
-    username: tacouser
-    password: tacopassword
-logging:
-  level:
-    tacos: WARN

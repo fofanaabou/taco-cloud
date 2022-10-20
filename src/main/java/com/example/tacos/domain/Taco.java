@@ -2,10 +2,15 @@ package com.example.tacos.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -16,13 +21,17 @@ import java.util.Objects;
 @Table
 @Entity
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@RestResource(rel = "tacos", path = "tacos")
 public class Taco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date createdAt = new Date();
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @NonNull
     @Size(min = 5, message = "Name must be at least 5 characters long")
